@@ -1,3 +1,3 @@
 # Todo App
 
-Todo list application.
+basic "Todo list" application with React.
