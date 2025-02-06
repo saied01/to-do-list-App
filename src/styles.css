@@ -1,0 +1,134 @@
+:root {
+    --primary-color: #CD5C5C;
+    --secondary-color: #FFDEAD;
+    --selected-color:#FFE4B5;
+    --bg-color: #FFFAFA;
+}
+
+* {
+    font-family: "Poppins", serif;
+    box-sizing: border-box;
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+}
+
+header {
+    display: flex;
+    justify-content: center;
+}
+
+.tab-container {
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid #3333;
+    padding-bottom: 5px;
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 10px;
+    position: relative;
+    padding: 10px 15px;
+}
+
+.tab-selected {
+    color: white;
+}
+
+.tab-button:hover {
+    color: var(--secondary-color);
+}
+
+.tab-selected::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary-color); /* Color azul para la línea inferior */
+}
+
+button {
+    background-color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.input-button {
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 7px;
+    border: 2px solid var(--primary-color);
+    box-shadow: 2px 2px 0 0 var(--primary-color), 4px 4px 0 0 lightblue;
+}
+
+.input-button:hover {
+    background-color: var(--selected-color);
+    transition: 0.2s;
+    box-shadow: 1px 1px 0 0 var(--primary-color), 2px 2px 0 0 lightblue;
+    transform: translate(2px, 2px);
+}
+
+.input-container {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-container input {
+    height: 40px;
+    width: 220px;
+    border: lightblue solid 2px;
+    border-radius: 5px;
+}
+
+.input-container input:focus {
+    outline: none;
+}
+
+.card {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea los elementos dentro de la card a la izquierda */
+    width: 300px; /* Ajusta según necesites */
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.card p {
+    align-self: flex-start;
+    margin: 0;
+}
+
+.todo-buttons {
+    align-self: center; /* Asegura que los botones sigan centrados */
+    display: flex;
+    gap: 10px;
+}
+
+.todo-buttons h6 {
+    background: lightblue;
+    color: tomato;
+}
+
+.todo-buttons button{
+    border: transparent 1px solid;
+    border-radius: 5px;
+    width: 130px;
+    background: lightblue;
+    font-size: 32px;
+    margin-right: 5px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.todo-buttons button:disabled h6 {
+    color: gray;
+}
