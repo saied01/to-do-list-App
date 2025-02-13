@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { React, useState, useEffect } from 'react'
 import './styles.css'
 import {Header} from './components/Header.jsx'
 import {Tabs} from "./components/Tabs.jsx";
@@ -7,15 +7,17 @@ import {TodoInput} from "./components/TodoInput.jsx";
 
 function App() {
 
-    const [tasks, setNewTasks] = useState([{input: 'Enter your firs task!', completed: false },]);
+    const [tasks, setNewTasks] = useState([{input: 'Enter your firs task!', completed: false, isEditing: false },]);
     const [selectedTab, setSelectedTab] = useState('All');
 
     function handleAddTask(newTask)  {
         const newTaskList = {
             input: newTask,
-            completed: false
+            completed: false,
+            isEditing: false
         }
         setNewTasks([...tasks, newTaskList]);
+        handleSaveData(newTaskList);
     }
 
     const handleRemoveTask = (index) => {
@@ -23,6 +25,7 @@ function App() {
             return taskIndex !== index
         });
         setNewTasks(newTaskList);
+        handleSaveData(newTaskList);
     }
 
     const handleEndTask = (index) => {
@@ -32,26 +35,31 @@ function App() {
             )}
         )
         setNewTasks(newTaskList);
+        handleSaveData(newTaskList);
     }
 
-    /*
+    const handleEditTask = (index, newText) => {
+        const newTaskList = tasks.map((task, i) => (i === index ? { ...task, input: newText } : task))
+        setNewTasks(newTaskList);
+        handleSaveData(newTaskList);
+    };
+
+
     function handleSaveData(currTasks) {
         localStorage.setItem('todo-app', JSON.stringify({ tasks: currTasks }))
     }
 
     useEffect(() => {
-        if (!localStorage || !localStorage.getItem('todo-app')) { return }       PREGUNRARLE A ALGUN NIGGA QUE SEPA POR QUE NO FUNCIONA.
-        console.log('useffect');
-
+        if (!localStorage || !localStorage.getItem('todo-app')) { return }
         let db = JSON.parse(localStorage.getItem('todo-app'))
         setNewTasks(db.tasks)
-    }, []); */
+    }, [])
 
   return (
     <>
       <Header tasks={tasks} />
       <Tabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} tasks={tasks}/>
-      <TodoList handleEndTask={handleEndTask} handleRemoveTask={handleRemoveTask} tasks={tasks} selectedTab={selectedTab}/>
+      <TodoList handleEditTask={handleEditTask} handleEndTask={handleEndTask} handleRemoveTask={handleRemoveTask} tasks={tasks} selectedTab={selectedTab}/>
       <TodoInput handleAddTask={handleAddTask}/>
     </>
   )
